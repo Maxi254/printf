@@ -1,39 +1,50 @@
 #include "main.h"
-/**
- * _printf - func that prints formttd str to std/O
- * @format: I/str
- * Return: total char to std/O
- */
+#include <stdarg.h>
+#include <stdio.h>
 
+/**
+ * _printf - generates output accordin to f.
+ * @format: string
+ * Return: num of char printed
+ */
 int _printf(const char *format, ...)
 {
-        int print_count;
-        va_list arg_itr;
+	va_list args;
+	int count = 0;
 
-        /* searches table */
-        search_t function_array[] =
-        {
-                {print_char, "c"},
-                {print_str, "s"},
-                {format_operator, "%"},
-                {print_integer, "i"},
-                {print_integer, "d"},
-                {print_unsigned_integer, "u"},
-                {NULL, NULL}
-        };
-          
-        if (format == NULL)
-        {
-                return (-1);
-        }    
-      
-        va_start(ar_i, format);
+	va_start(args, format);
 
-        /* we call parser */ 
-        print_count = parser(format, function_array, arg_itr);
+	while (*format != '\0')
+	{
+		if (*format == '%')
+		{
+			format++;
+			switch (*format)
+			{
+				case 'c':
+					count += _write_char(va_arg(args, int));
+					break;
+				case 's':
+					count += _write_str(va_arg(args, char *));
+					break;
+				case '%':
+					count += _write_char('%');
+					break;
+				default:
+					count += _write_char('%');
+					count += _write_char(*format);
+					break;
+			}
+		}
+		else
+		{
+			count += _write_char(*format);
+		}
 
-        va_end(arg_itr); 
-    
-        return (print_count);
-}   
+		format++;
+	}
+	va_end(args);
+	return (count);
+}
+   
 
