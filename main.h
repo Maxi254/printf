@@ -24,7 +24,7 @@ typedef struct search_t search_t;
 int _printf(const char *format, ...);
 int format_operator(__attribute__((unused))va_list lst);
 int print_char(va_list);
-int writer(char character);
+int _write_char(char c);
 int parser(const char *format, search_t func_spcfr_array[], int arg_itr);
 int print_str(va_list);
 int print_unsigned_integer(va_list);
