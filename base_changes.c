@@ -20,7 +20,7 @@ int print_binary(va_list list)
 		return (-1);
 	lens = base_len(num, 2);
 	str = malloc(sizeof(char) * lens + 1);
-	if (str = NULL)
+	if (str == NULL)
 		return (-1);
 
 	for (a = 0; num > 0; a++)
@@ -40,6 +40,42 @@ int print_binary(va_list list)
 	free(rev_str);
 	return (lens);
 }
+/**
+ * rev_string - rev string
+ * @s: str to be revd
+ * Return: a ptr to the revd str
+ */
+char *rev_string(char *s)
+{
+	if (s == NULL)
+		return (NULL);
+
+	int lens = 0;
+	char *start = s;
+	char *end = s;
+
+	while (*end != '\0')
+	{
+		end++;
+		lens++;
+	}
+
+	end--;
+
+	while (start < end)
+	{
+		char temp = *start;
+		*start = *end;
+		*end = tem;
+
+		start++;
+		end--;
+	}
+
+	return s;
+}
+
+
 
 /**
  * print_octal - prints number in octal
@@ -58,7 +94,7 @@ int print_octal(va_list list)
 		return (_write_char('0'));
 	if (num < 1)
 		return (-1);
-	lens - base_len(num, 8);
+	lens = base_len(num, 8);
 	oct_rep = malloc(sizeof(char) * lens + 1);
 	if (oct_rep == NULL)
 		return (-1);
