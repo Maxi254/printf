@@ -25,7 +25,7 @@ int _printf(const char *format, ...)
 					count += _write_char(va_arg(args, int));
 					break;
 				case 's':
-					count += _write_str(va_arg(args, char *));
+					count += _write_char(va_arg(args, char *));
 					break;
 				case '%':
 					count += _write_char('%');
@@ -38,7 +38,8 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			count += _write_char(*format);
+			char character = *format;
+			count += _write_char(character);
 		}
 
 		format++;
